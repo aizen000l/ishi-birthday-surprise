@@ -890,6 +890,130 @@ h1 {
   .mem { padding: .5rem .5rem .7rem; }
 }
 
+
+/* ================================================================
+   FRONT PAGE — rich, filled, animated
+   ================================================================ */
+
+/* ---- Sticker entrance ---- */
+#s1 .sticker img {
+  animation: stickerBounce 1s cubic-bezier(.22,1,.36,1) .2s backwards;
+}
+@keyframes stickerBounce {
+  0% { opacity: 0; transform: scale(.5) translateY(20px); }
+  60% { transform: scale(1.08) translateY(-4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ---- Chip pulse ---- */
+#s1 .chip {
+  animation: chipPulse 2s ease-in-out infinite, fadeInDown .6s ease .1s backwards;
+}
+@keyframes chipPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(124,92,255,.15); }
+  50% { box-shadow: 0 0 0 8px rgba(124,92,255,0); }
+}
+
+/* ---- Typewriter h1 ---- */
+#s1 h1 {
+  overflow: hidden; white-space: nowrap;
+  animation: typeReveal 1.5s steps(40,end) .6s both;
+  width: 0;
+  border-right: 3px solid var(--pink);
+}
+#s1 h1.typing-done { border-right: none; width: 100%; animation: none; }
+@keyframes typeReveal { from { width: 0; } to { width: 100%; } }
+
+/* ---- Staggered fade-in for elements ---- */
+#s1 .script { animation: fadeInUp .5s ease 1.8s backwards; }
+#s1 .lead { animation: fadeInUp .5s ease 2.1s backwards; }
+#s1 .btn-row { animation: fadeInUp .5s ease 2.4s backwards; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ---- Floating ambient particles for s1 ---- */
+.s1-particles {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
+}
+.s1-particle {
+  position: absolute; font-size: 1.2rem; opacity: 0;
+  animation: s1Float linear infinite;
+}
+@keyframes s1Float {
+  0% { opacity: 0; transform: translateY(0) rotate(0deg) scale(.5); }
+  10% { opacity: .45; }
+  80% { opacity: .35; }
+  100% { opacity: 0; transform: translateY(-90vh) rotate(180deg) scale(1); }
+}
+
+/* ---- Decorative divider lines ---- */
+.s1-divider {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  margin: .8rem 0; animation: fadeInUp .5s ease 2s backwards;
+}
+.s1-divider::before, .s1-divider::after {
+  content: ''; height: 1px; flex: 1; max-width: 80px;
+  background: linear-gradient(90deg, transparent, rgba(124,92,255,.3), transparent);
+}
+.s1-divider span {
+  font-size: .75rem; color: rgba(124,92,255,.5); letter-spacing: 4px;
+  text-transform: uppercase; font-weight: 600;
+}
+
+/* ---- Glow orbs ---- */
+.s1-orb {
+  position: absolute; border-radius: 50%; filter: blur(50px); opacity: .15;
+  pointer-events: none; animation: orbFloat 8s ease-in-out infinite alternate;
+}
+@keyframes orbFloat {
+  0% { transform: translate(0,0) scale(1); }
+  100% { transform: translate(var(--dx), var(--dy)) scale(1.2); }
+}
+
+/* ---- Hint text at bottom ---- */
+.s1-hint {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  font-size: .65rem; color: rgba(200,190,230,.35); letter-spacing: 2px;
+  text-transform: uppercase; font-weight: 600;
+  animation: fadeInUp .5s ease 2.8s backwards;
+}
+.s1-hint .arrow {
+  display: inline-block; animation: bounceArrow 1.2s ease-in-out infinite;
+}
+@keyframes bounceArrow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+
+/* ---- Decorative corner accents ---- */
+.s1-corner {
+  position: absolute; width: 40px; height: 40px; opacity: .15;
+  pointer-events: none;
+}
+.s1-corner::before, .s1-corner::after {
+  content: ''; position: absolute; background: rgba(124,92,255,.4);
+}
+.s1-corner::before { width: 24px; height: 1.5px; }
+.s1-corner::after { width: 1.5px; height: 24px; }
+.s1-corner.tl { top: 1.5rem; left: 1.5rem; }
+.s1-corner.tl::before { top: 0; left: 0; }
+.s1-corner.tl::after { top: 0; left: 0; }
+.s1-corner.tr { top: 1.5rem; right: 1.5rem; }
+.s1-corner.tr::before { top: 0; right: 0; }
+.s1-corner.tr::after { top: 0; right: 0; }
+.s1-corner.bl { bottom: 1.5rem; left: 1.5rem; }
+.s1-corner.bl::before { bottom: 0; left: 0; }
+.s1-corner.bl::after { bottom: 0; left: 0; }
+.s1-corner.br { bottom: 1.5rem; right: 1.5rem; }
+.s1-corner.br::before { bottom: 0; right: 0; }
+.s1-corner.br::after { bottom: 0; right: 0; }
+
+
+/* Mobile-safe heading */
+@media (max-width: 480px) {
+  #s1 h1 {
+    white-space: normal; width: 100%; overflow: visible;
+    animation: none; border-right: none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -950,6 +1074,34 @@ h1 {
 
 <!-- =================== SCREEN 1 · OPENING + YES/NO =================== -->
 <section class="screen active" id="s1">
+
+  <!-- Glow orbs -->
+  <div class="s1-orb" style="width:200px;height:200px;background:rgba(124,92,255,.4);top:10%;left:-5%;--dx:30px;--dy:-20px;animation-delay:0s"></div>
+  <div class="s1-orb" style="width:160px;height:160px;background:rgba(255,111,156,.3);bottom:15%;right:-3%;--dx:-25px;--dy:15px;animation-delay:2s"></div>
+  <div class="s1-orb" style="width:120px;height:120px;background:rgba(255,201,60,.2);top:50%;left:60%;--dx:20px;--dy:-30px;animation-delay:4s"></div>
+
+  <!-- Floating particles -->
+  <div class="s1-particles">
+    <span class="s1-particle" style="left:8%;animation-duration:7s;animation-delay:0s;font-size:1rem">💜</span>
+    <span class="s1-particle" style="left:20%;animation-duration:9s;animation-delay:1.2s;font-size:.8rem">✦</span>
+    <span class="s1-particle" style="left:35%;animation-duration:8s;animation-delay:2.5s;font-size:1.1rem">🎁</span>
+    <span class="s1-particle" style="left:50%;animation-duration:7.5s;animation-delay:.8s;font-size:.7rem">✧</span>
+    <span class="s1-particle" style="left:65%;animation-duration:8.5s;animation-delay:3s;font-size:.9rem">⭐</span>
+    <span class="s1-particle" style="left:78%;animation-duration:9.5s;animation-delay:1.8s;font-size:1rem">🎀</span>
+    <span class="s1-particle" style="left:90%;animation-duration:7s;animation-delay:4s;font-size:.8rem">✦</span>
+    <span class="s1-particle" style="left:12%;animation-duration:10s;animation-delay:5s;font-size:.7rem">💜</span>
+    <span class="s1-particle" style="left:42%;animation-duration:8s;animation-delay:6s;font-size:.9rem">✧</span>
+    <span class="s1-particle" style="left:72%;animation-duration:7.5s;animation-delay:3.5s;font-size:1rem">🌟</span>
+    <span class="s1-particle" style="left:85%;animation-duration:9s;animation-delay:2s;font-size:.75rem">💜</span>
+    <span class="s1-particle" style="left:55%;animation-duration:8.5s;animation-delay:4.5s;font-size:.85rem">✦</span>
+  </div>
+
+  <!-- Corner accents -->
+  <div class="s1-corner tl"></div>
+  <div class="s1-corner tr"></div>
+  <div class="s1-corner bl"></div>
+  <div class="s1-corner br"></div>
+
   <div class="wrap">
     <span class="chip">FOR ISHI ✦ A LITTLE SURPRISE</span>
     <div class="sticker s-md" style="margin-bottom:.9rem">
@@ -957,15 +1109,16 @@ h1 {
     </div>
     <h1>Heyy Ishi, something special is waiting</h1>
     <p class="script">made just for you</p>
+    <div class="s1-divider"><span>✦</span></div>
     <p class="lead">A small surprise for your special day. It has your name all over it —<br><strong>do you want to open it?</strong></p>
     <div class="btn-row">
       <button class="btn" id="btnYes">Yes, show me! 💜</button>
       <button class="btn ghost" id="btnNo">Maybe later</button>
     </div>
+    <div class="s1-hint">scroll through the magic <span class="arrow">↓</span></div>
   </div>
-</section>
 
-<!-- =================== SCREEN 2 · "NO" TEASE =================== -->
+</section>
 <section class="screen" id="s2">
   <div class="wrap">
     <span class="chip">ARE YOU SURE, ISHI?</span>
