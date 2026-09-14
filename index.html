@@ -345,6 +345,104 @@ h2 {
   margin-top: -2px;
 }
 
+
+/* ================================================================
+   CAKE ANIMATIONS — premium feel
+   ================================================================ */
+
+/* ---- Cake entrance: float up + bounce ---- */
+.cake-stand {
+  animation: cakeEntrance .8s cubic-bezier(.22,1,.36,1) backwards;
+}
+@keyframes cakeEntrance {
+  0% { opacity: 0; transform: translateY(40px) scale(.9); }
+  60% { opacity: 1; transform: translateY(-6px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---- Cake ambient glow ---- */
+.cake::after {
+  content: ''; position: absolute; inset: -12px; border-radius: 20px; z-index: -1;
+  background: radial-gradient(ellipse, rgba(255,140,180,.12), transparent 65%);
+  animation: cakeGlow 3s ease-in-out infinite alternate;
+}
+@keyframes cakeGlow { 0% { opacity:.3; transform: scale(1); } 100% { opacity:.7; transform: scale(1.05); } }
+
+/* ---- Layer shimmer sweep ---- */
+.cake-layer::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: 3;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.25) 48%, transparent 60%);
+  animation: shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%,100% { transform: translateX(-130%); }
+  40%,60% { transform: translateX(130%); }
+}
+.cake-layer.top::after { animation-delay: 0s; }
+.cake-layer.mid::after { animation-delay: .8s; }
+.cake-layer.bot::after { animation-delay: 1.6s; }
+
+/* ---- Candle gentle sway ---- */
+.candle:nth-child(1) { animation: candleSway 3.5s ease-in-out infinite; }
+.candle:nth-child(2) { animation: candleSway 4s ease-in-out infinite .5s; }
+.candle:nth-child(3) { animation: candleSway 3.8s ease-in-out infinite 1s; }
+@keyframes candleSway {
+  0%,100% { transform: rotate(0deg); }
+  30% { transform: rotate(1.2deg); }
+  70% { transform: rotate(-1deg); }
+}
+
+/* ---- Frosting drip grow ---- */
+.frosting::before, .frosting-top::before {
+  animation: dripGrow 2s ease-out forwards;
+}
+@keyframes dripGrow {
+  0% { height: 0; }
+  100% { height: 18px; }
+}
+
+/* ---- Plate shine sweep ---- */
+.cake-plate::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.4) 50%, transparent 70%);
+  animation: plateShine 5s ease-in-out infinite;
+}
+@keyframes plateShine {
+  0%,100% { transform: translateX(-100%); }
+  30%,50% { transform: translateX(100%); }
+}
+
+/* ---- Floating ambient sparkles around cake ---- */
+.cake-sparkles {
+  position: absolute; inset: -30px; pointer-events: none; z-index: 8;
+}
+.cake-sparkle {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--gold); opacity: 0;
+  animation: floatSparkle 3s ease-in-out infinite;
+}
+@keyframes floatSparkle {
+  0% { opacity: 0; transform: translateY(0) scale(.5); }
+  20% { opacity: .8; }
+  80% { opacity: .6; }
+  100% { opacity: 0; transform: translateY(-50px) scale(0); }
+}
+
+/* ---- Rising star particles ---- */
+.cake-stars {
+  position: absolute; inset: 0; pointer-events: none; z-index: 9;
+}
+.cake-star-particle {
+  position: absolute; bottom: 20%; font-size: .6rem; opacity: 0;
+  animation: riseStar 3.5s ease-in-out infinite;
+}
+@keyframes riseStar {
+  0% { opacity: 0; transform: translateY(0) scale(.5); }
+  15% { opacity: .7; }
+  85% { opacity: .5; }
+  100% { opacity: 0; transform: translateY(-80px) scale(.2); }
+}
+
 /* ---- Cake Layers ---- */
 .cake {
   width: 200px; height: 110px; position: relative;
@@ -1033,6 +1131,26 @@ h1 {
             </div>
             <div class="candle" id="c3">
               <div class="flame-wrap"><span class="flame"></span></div>
+            </div>
+            <!-- Floating sparkles -->
+            <div class="cake-sparkles">
+              <span class="cake-sparkle" style="left:10%;top:20%;animation-delay:0s"></span>
+              <span class="cake-sparkle" style="left:80%;top:30%;animation-delay:.7s"></span>
+              <span class="cake-sparkle" style="left:5%;top:60%;animation-delay:1.4s"></span>
+              <span class="cake-sparkle" style="left:90%;top:50%;animation-delay:2s"></span>
+              <span class="cake-sparkle" style="left:50%;top:10%;animation-delay:1s"></span>
+              <span class="cake-sparkle" style="left:30%;top:80%;animation-delay:2.5s"></span>
+              <span class="cake-sparkle" style="left:70%;top:70%;animation-delay:1.8s"></span>
+              <span class="cake-sparkle" style="left:15%;top:40%;animation-delay:.4s"></span>
+            </div>
+            <!-- Rising star particles -->
+            <div class="cake-stars">
+              <span class="cake-star-particle" style="left:15%;animation-delay:0s">✦</span>
+              <span class="cake-star-particle" style="left:40%;animation-delay:.8s">✧</span>
+              <span class="cake-star-particle" style="left:65%;animation-delay:1.6s">✦</span>
+              <span class="cake-star-particle" style="left:85%;animation-delay:2.4s">✧</span>
+              <span class="cake-star-particle" style="left:30%;animation-delay:1.2s">✦</span>
+              <span class="cake-star-particle" style="left:75%;animation-delay:2s">✧</span>
             </div>
             <!-- Sparkle burst container -->
             <div class="sparkle-burst" id="sparkBurst"></div>
