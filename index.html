@@ -504,6 +504,166 @@ h2 {
 .screen {
   transition: opacity .35s ease;
 }
+
+/* ================================================================
+   PROFESSIONAL UPGRADE — v2
+   ================================================================ */
+
+/* =================== H1 POLISH =================== */
+h1 {
+  letter-spacing: -.02em;
+  text-shadow: 0 2px 20px rgba(100,70,220,.2);
+  line-height: 1.2;
+}
+.script {
+  text-shadow: 0 1px 12px rgba(180,130,255,.15);
+}
+
+/* =================== GIFT GLOW PULSE =================== */
+.gift::after {
+  content: ''; position: absolute; inset: -3px; border-radius: 21px;
+  background: linear-gradient(135deg, rgba(255,255,255,.15), rgba(255,255,255,.03));
+  opacity: 0; transition: opacity .4s; pointer-events: none; z-index: 0;
+}
+.gift:hover::after { opacity: 1; }
+@keyframes giftGlow {
+  0%,100% { box-shadow: 0 10px 28px rgba(80,50,180,.18); }
+  50% { box-shadow: 0 10px 28px rgba(80,50,180,.18), 0 0 40px rgba(124,92,255,.15); }
+}
+.gift { animation: giftIn .5s cubic-bezier(.22,1,.36,1) backwards, giftGlow 3s ease-in-out infinite; }
+.gift:nth-child(1) { animation-delay: .1s, 0s; }
+.gift:nth-child(2) { animation-delay: .2s, .5s; }
+.gift:nth-child(3) { animation-delay: .3s, 1s; }
+
+/* =================== ENVELOPE SEAL ANIMATION =================== */
+.letter-head svg {
+  animation: sealPulse 2.5s ease-in-out infinite;
+}
+@keyframes sealPulse {
+  0%,100% { transform: scale(1); filter: drop-shadow(0 2px 6px rgba(255,111,156,.2)); }
+  50% { transform: scale(1.06); filter: drop-shadow(0 4px 12px rgba(255,111,156,.35)); }
+}
+.letter p {
+  border-right: 2px solid transparent;
+}
+.letter p.typing {
+  border-right: 2px solid var(--pink);
+  animation: caretBlink .6s step-end infinite;
+}
+@keyframes caretBlink { 0%,100% { border-color: var(--pink); } 50% { border-color: transparent; } }
+
+/* =================== POLAROID MEMORY CARDS =================== */
+.mem {
+  background: #fff;
+  border-radius: 6px;
+  padding: .6rem .6rem .9rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.08);
+  transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s;
+  transform-origin: center center;
+}
+.mem:nth-child(1) { transform: rotate(-2deg); }
+.mem:nth-child(2) { transform: rotate(1.5deg); }
+.mem:nth-child(3) { transform: rotate(-1deg); }
+.mem:nth-child(4) { transform: rotate(2deg); }
+.mem:nth-child(5) { transform: rotate(-1.5deg); }
+.mem:nth-child(6) { transform: rotate(0.5deg); }
+.mem:hover {
+  transform: rotate(0deg) translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(0,0,0,.15), 0 2px 6px rgba(0,0,0,.1);
+  z-index: 2;
+}
+.mem .m-e { font-size: 2.4rem; display: block; margin-bottom: .4rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,.1)); }
+.mem .m-t { font-weight: 700; font-size: .82rem; color: #2d2450; }
+.mem .m-s { font-size: .68rem; color: #9a92b8; margin-top: .15rem; display: block; font-style: italic; }
+
+/* =================== FRIENDSHIP CARD HOVER GLOW =================== */
+.friend-card {
+  transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s, border-color .3s;
+}
+.friend-card:hover {
+  transform: translateX(6px);
+  box-shadow: -4px 0 20px rgba(124,92,255,.12), 0 4px 16px rgba(0,0,0,.06);
+}
+
+/* =================== BUCKET LIST CHECKBOX EFFECT =================== */
+.bucket-item {
+  position: relative;
+  transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s;
+}
+.bucket-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+.bucket-item::before {
+  content: '☆'; position: absolute; top: .8rem; right: .8rem;
+  font-size: 1.1rem; opacity: .3; transition: all .3s;
+}
+.bucket-item:hover::before { opacity: 1; content: '★'; color: var(--gold); }
+
+/* =================== FINAL IMAGE REVEAL =================== */
+.final-img {
+  transform: rotate(-2deg);
+  transition: transform .6s cubic-bezier(.22,1,.36,1), box-shadow .6s;
+  animation: photoReveal .8s cubic-bezier(.22,1,.36,1) backwards;
+}
+.final-img:hover { transform: rotate(0deg) scale(1.02); box-shadow: 0 40px 100px rgba(0,0,0,.4); }
+@keyframes photoReveal {
+  from { opacity: 0; transform: rotate(-8deg) scale(.85) translateY(30px); }
+  to { opacity: 1; transform: rotate(-2deg) scale(1) translateY(0); }
+}
+
+/* =================== MUTE TOGGLE =================== */
+.mute-btn {
+  position: fixed; top: 1rem; right: 1rem; z-index: 120;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  backdrop-filter: blur(8px); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: rgba(255,255,255,.6);
+  transition: all .3s; opacity: 0;
+}
+.mute-btn.visible { opacity: 1; }
+.mute-btn:hover { background: rgba(255,255,255,.15); color: #fff; transform: scale(1.05); }
+
+/* =================== ONE MORE SURPRISE BTN =================== */
+.btn-surprise {
+  display: inline-flex; align-items: center; gap: .5rem;
+  margin-top: 1.2rem; padding: .7rem 1.6rem;
+  background: linear-gradient(135deg, var(--purple), var(--pink));
+  color: #fff; border: none; border-radius: 40px;
+  font-family: 'DM Sans', sans-serif; font-size: .85rem; font-weight: 600;
+  cursor: pointer; transition: all .3s cubic-bezier(.22,1,.36,1);
+  box-shadow: 0 8px 24px rgba(124,92,255,.3);
+  letter-spacing: .01em;
+}
+.btn-surprise:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(124,92,255,.45); }
+.btn-surprise:active { transform: scale(.98); }
+.btn-surprise .arrow { transition: transform .3s; }
+.btn-surprise:hover .arrow { transform: translateX(3px); }
+
+/* =================== ACCESSIBILITY: REDUCED MOTION =================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .screen.active { animation: none !important; }
+  .progress-dots { display: none !important; }
+  .confetti-wrap { display: none !important; }
+  .shooting-star { display: none !important; }
+}
+
+/* =================== MOBILE OPTIMIZATIONS =================== */
+@media (max-width: 480px) {
+  h1 { font-size: 1.6rem; }
+  .wrap { padding: 0 .5rem; }
+  .btn { padding: .75rem 1.5rem; font-size: .85rem; }
+  .letter p { font-size: .85rem; line-height: 1.75; }
+  .friend-card { padding: .9rem 1rem; }
+  .mem { padding: .5rem .5rem .7rem; }
+}
+
 </style>
 </head>
 <body>
@@ -557,6 +717,9 @@ h2 {
 
 <!-- PROGRESS DOTS -->
 <div class="progress-dots" id="progressDots"></div>
+
+<!-- MUSIC TOGGLE -->
+<button class="mute-btn" id="muteBtn" aria-label="Toggle music">🔇</button>
 
 
 <!-- =================== SCREEN 1 · OPENING + YES/NO =================== -->
@@ -817,6 +980,7 @@ h2 {
       <p class="strong">This year, I wish you tonnes of success, sanity (when you need it), and people who love you as much as I do. Because trust me — you deserve the absolute world. 🌍</p>
       <p class="sign">— your bestie, always 💜</p>
     </div>
+    <button class="btn-surprise" id="btnOneMore">One more surprise <span class="arrow">→</span></button>
       <div style="text-align:center; margin-top:1.4rem">
         <button class="back-gifts" id="btnBackGifts7">← Back to Gifts</button>
       </div>
@@ -961,9 +1125,9 @@ h2 {
   const btnNoYes = document.getElementById('btnNoYes');
   const btnNoNo  = document.getElementById('btnNoNo');
 
-  btnYes.addEventListener('click', () => { confettiBurst(); show('s3'); });
+  btnYes.addEventListener('click', () => { confettiBurst(); show('s3'); muteBtn.classList.add('visible'); });
   btnNo.addEventListener('click', () => show('s2'));
-  btnNoYes.addEventListener('click', () => { confettiBurst(); show('s3'); });
+  btnNoYes.addEventListener('click', () => { confettiBurst(); show('s3'); muteBtn.classList.add('visible'); });
 
   /* "Still no" runs away on desktop, argues on mobile */
   btnNoNo.addEventListener('mouseenter', () => {
@@ -981,18 +1145,21 @@ h2 {
   btnNoNo.addEventListener('click', () => {
     confettiBurst();
     const s = show('s3');
+    muteBtn.classList.add('visible');
     const h = s.querySelector('h1');
     if (h) h.textContent = 'Okay whatever, you clicked No… but enjoy it anyway 😌💜';
   });
 
   /* Gift 1 — wish → cake → memories */
-  document.getElementById('gift1').addEventListener('click', () => { document.getElementById('gift1').classList.add('opened'); show('s4'); });
+  document.getElementById('gift1').addEventListener('click', () => { document.getElementById('gift1').classList.add('opened'); show('s4'); setTimeout(playChime, 400); });
   document.getElementById('btnCake').addEventListener('click', () => show('s5'));
   document.getElementById('btnBlow').addEventListener('click', () => {
     document.querySelectorAll('.candle').forEach(c => c.classList.add('out'));
     document.getElementById('wishDone').classList.remove('hidden');
     document.getElementById('memRow').classList.remove('hidden');
     confettiBurst();
+    playBlowSfx();
+    muteBtn.classList.add('visible');
   });
   document.getElementById('btnMemories').addEventListener('click', () => show('s6'));
 
@@ -1005,7 +1172,7 @@ h2 {
   document.getElementById('btnToLetter').addEventListener('click', () => show('s7'));
 
   /* Gift 2 — letter */
-  document.getElementById('gift2').addEventListener('click', () => { document.getElementById('gift2').classList.add('opened'); show('s7'); });
+  document.getElementById('gift2').addEventListener('click', () => { document.getElementById('gift2').classList.add('opened'); confettiBurst(); show('s7'); });
 
   /* Gift 3 — final image */
   document.getElementById('gift3').addEventListener('click', () => { document.getElementById('gift3').classList.add('opened'); confettiBurst(); show('s8'); });
@@ -1015,10 +1182,70 @@ h2 {
   document.getElementById('btnBackGifts7').addEventListener('click', () => show('s3'));
   document.getElementById('btnBackGifts8').addEventListener('click', () => show('s3'));
 
+  /* ============ Birthday chime (Web Audio) ============ */
+  let audioCtx = null;
+  let chimeGain = null;
+  function playChime() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      chimeGain = audioCtx.createGain();
+      chimeGain.gain.value = 0.15;
+      chimeGain.connect(audioCtx.destination);
+      const notes = [523.25, 659.25, 783.99, 1046.50, 783.99, 659.25, 523.25, 659.25, 783.99];
+      notes.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const noteGain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        noteGain.gain.setValueAtTime(0, audioCtx.currentTime + i * 0.18);
+        noteGain.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + i * 0.18 + 0.05);
+        noteGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.18 + 0.35);
+        osc.connect(noteGain);
+        noteGain.connect(chimeGain);
+        osc.start(audioCtx.currentTime + i * 0.18);
+        osc.stop(audioCtx.currentTime + i * 0.18 + 0.4);
+      });
+    } catch(e) {}
+  }
+  function playBlowSfx() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const bufSize = audioCtx.sampleRate * 0.6;
+      const buf = audioCtx.createBuffer(1, bufSize, audioCtx.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < bufSize; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / bufSize);
+      const src = audioCtx.createBufferSource();
+      src.buffer = buf;
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass'; filter.frequency.value = 800;
+      const g = audioCtx.createGain();
+      g.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+      src.connect(filter); filter.connect(g); g.connect(audioCtx.destination);
+      src.start(); src.stop(audioCtx.currentTime + 0.6);
+    } catch(e) {}
+  }
+
+  /* ============ Mute toggle ============ */
+  const muteBtn = document.getElementById('muteBtn');
+  let muted = true;
+  muteBtn.addEventListener('click', () => {
+    muted = !muted;
+    muteBtn.textContent = muted ? '🔇' : '🔊';
+    if (!muted && chimeGain) chimeGain.gain.value = 0.15;
+    if (muted && chimeGain) chimeGain.gain.value = 0;
+  });
+
+  /* ============ One more surprise → s8 ============ */
+  document.getElementById('btnOneMore').addEventListener('click', () => { confettiBurst(); show('s8'); });
+
   document.getElementById('btnReplay').addEventListener('click', () => {
     document.querySelectorAll('.candle').forEach(c => c.classList.remove('out'));
     document.getElementById('wishDone').classList.add('hidden');
     document.getElementById('memRow').classList.add('hidden');
+    document.querySelectorAll('.gift.opened').forEach(g => g.classList.remove('opened'));
+    muteBtn.classList.remove('visible');
+    visited.clear();
     show('s1');
   });
 </script>
